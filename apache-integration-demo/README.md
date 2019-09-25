@@ -51,8 +51,7 @@ There are two locations configured to support OAuth2 authorization:
 You can check access with following command:
 
 ```bash
-curl -L -H "Authorization: Bearer ${AT}"
-https://apache.test.example/shared-oauth/
+curl -L -H "Authorization: Bearer ${AT}" https://apache.test.example/shared-oauth/
 ```
 
 Set the `AT` environment variable so that it contains the token you got by
