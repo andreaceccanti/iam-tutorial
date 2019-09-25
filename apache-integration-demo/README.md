@@ -6,7 +6,7 @@
 
 ```bash
 docker-compose build
-docker-compose up -d trust
+docker-compose up trust
 docker-compose up -d client
 ```
 
