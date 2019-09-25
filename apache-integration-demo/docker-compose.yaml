@@ -1,0 +1,69 @@
+version: '3.5'
+
+networks:
+  default:
+    name: test.example
+
+volumes:
+  db:
+  trustanchors:
+  cabundle:
+  storage:
+
+services:
+
+  trust:
+    image: indigoiam/trustanchors
+    environment:
+      - FORCE_TRUST_ANCHORS_UPDATE=1
+    volumes:
+      - trustanchors:/etc/grid-security/certificates
+      - cabundle:/etc/pki
+  
+  httpd-setup:
+    container_name: httpd-setup
+    build:
+      context: docker/httpd
+
+    volumes:
+      - ./assets/scripts:/scripts:ro
+      - ./assets/web:/web:ro
+      - storage:/storage
+
+    entrypoint:
+      - /scripts/init-storage.sh
+
+  client:
+    build:
+      context: docker/client
+
+    command: sleep infinity
+
+    volumes:
+      - ./assets/client:/home/test/demo
+      - trustanchors:/etc/grid-security/certificates
+      - cabundle:/etc/pki
+
+  httpd:
+    build:
+      context: docker/httpd
+      
+    env_file: env/httpd.env
+      
+    ports:
+      - "443:443"
+
+    depends_on:
+      - httpd-setup
+
+    volumes:
+      - ./assets/certs:/certs:ro
+      - ./assets/httpd/conf.d/:/etc/httpd/conf.d:ro
+      - storage:/storage
+      - trustanchors:/etc/grid-security/certificates
+      - cabundle:/etc/pki
+
+    networks:
+      default:
+        aliases:
+          - apache.test.example

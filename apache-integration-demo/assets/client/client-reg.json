@@ -1,0 +1,18 @@
+{
+  "redirect_uris": [
+    "https://apache.test.example/oidc/redirect_uri"
+  ],
+  "client_name": "apache-integration-demo",
+  "contacts": [
+    "test@iam.test"
+  ],
+  "token_endpoint_auth_method": "client_secret_basic",
+  "scope": "address phone openid email profile",
+  "grant_types": [
+    "authorization_code",
+    "urn:ietf:params:oauth:grant-type:device_code"
+  ],
+  "response_types": [
+    "code"
+  ]
+}

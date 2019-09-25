@@ -1,0 +1,5 @@
+#!/bin/bash
+echo "Content-Type: application/json"
+echo
+
+echo "{\"msg\": \"Hello ${OIDC_CLAIM_sub}@${OIDC_CLAIM_iss}!\"}"
