@@ -17,16 +17,8 @@ docker-compose exec client bash
 cd demo && sh create-client.sh
 ```
 
-The client credentials will be printed on the screen.
-A client.json file is also obtained from IAM.
-
-### Setup client credentials in the environment for the HTTPD 
-
-Append the obtained text from the above step in the apache server env file:
-
-```bash
-  env/httpd.env
-```
+The script will create a client, and the client credentials will be added to 
+an enviornment file sourced by apache daemon.
 
 ## Start the apache server
 
@@ -40,5 +32,11 @@ On my mac I have the following:
 127.0.0.1	localhost apache.test.example
 ```
 
-Point your browser to apache.test.example
+Then start the apache server by issuing the following command:
+
+```bash
+docker-compose up -d httpd
+```
+
+Finally point your browser to https://apache.test.example
 

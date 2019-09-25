@@ -48,7 +48,9 @@ services:
     build:
       context: docker/httpd
       
-    env_file: env/httpd.env
+    env_file: 
+      - env/httpd.env
+      - assets/client/client-creds.env
       
     ports:
       - "443:443"
