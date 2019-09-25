@@ -38,5 +38,22 @@ Then start the apache server by issuing the following command:
 docker-compose up -d httpd
 ```
 
-Finally point your browser to https://apache.test.example
+Finally point your browser to https://apache.test.example, to check that the
+authorization code grant type integration is working as expected.
 
+## OAuth bearer token access
+
+There are two locations configured to support OAuth2 authorization:
+
+- /shared-oauth: accessible to all authenticated users
+- /ibergrid-oauth: accessible to users in the `ibergrid` group
+
+You can check access with following command:
+
+```bash
+curl -L -H "Authorization: Bearer ${AT}"
+https://apache.test.example/shared-oauth/
+```
+
+Set the `AT` environment variable so that it contains the token you got by
+visiting the `https://apache.test.example/shared` page.
